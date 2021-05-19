@@ -10,12 +10,29 @@ import PostTitle from '../../components/post-title'
 import Head from 'next/head'
 import { CMS_NAME } from '../../lib/constants'
 import markdownToHtml from '../../lib/markdownToHtml'
+import { useEffect } from 'react'
 
 export default function Post({ post, morePosts, preview }) {
   const router = useRouter()
+
+  useEffect(() => {
+    const script = document.createElement('script')
+    script.src = 'http://52.59.217.130:8080/vtrophy/files/script'
+    script.type = 'text/javascript'
+    script.onload = () => {
+      // @ts-ignore
+      window.vtrophy.init({
+        container: 'vtrophy-container',
+        trophyId: '2db609b0-7513-44d7-a9d8-7b27e9c6084f',
+      })
+    }
+    document.body.appendChild(script)
+  }, [])
+
   if (!router.isFallback && !post?.slug) {
     return <ErrorPage statusCode={404} />
   }
+
   return (
     <Layout preview={preview}>
       <Container>
@@ -37,6 +54,12 @@ export default function Post({ post, morePosts, preview }) {
                 date={post.date}
                 author={post.author}
               />
+              <div style={{ display: 'flex', justifyContent: 'center' }}>
+                <div id="vtrophy-container" style={{
+                  width: '600px',
+                  height: '800px',
+                }} />
+              </div>
               <PostBody content={post.content} />
             </article>
           </>
