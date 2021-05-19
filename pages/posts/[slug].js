@@ -17,13 +17,13 @@ export default function Post({ post, morePosts, preview }) {
 
   useEffect(() => {
     const script = document.createElement('script')
-    script.src = 'http://52.59.217.130:8080/vtrophy/files/script'
+    script.src = 'https://app.myvtrophy.com/vtrophy/files/script'
     script.type = 'text/javascript'
     script.onload = () => {
       // @ts-ignore
       window.vtrophy.init({
         container: 'vtrophy-container',
-        trophyId: '2db609b0-7513-44d7-a9d8-7b27e9c6084f',
+        trophyId: '577eb8d0-a91c-4d39-b376-cc7d30919e60',
       })
     }
     document.body.appendChild(script)
